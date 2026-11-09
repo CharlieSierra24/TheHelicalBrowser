@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOHONorth Helical Browser</title>
+<meta name="theme-color" content="#1f45c8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#071655;--ink:#eef3ff;--dim:#a3b8f4;--yellow:#ffd23f;--line:#3c63e0;--panel:rgba(7,22,85,.78)}
+html,body{margin:0;height:100%;background:radial-gradient(ellipse at 50% 40%,#2347c9,#0e2487 45%,#050f3a 100%);color:var(--ink);font-family:"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;overflow:hidden}
+canvas{display:block;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+#bar{position:fixed;top:0;left:0;right:0;display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 16px;pointer-events:none}
+#bar>*{pointer-events:auto}
+#brand{display:flex;align-items:center;gap:10px;margin-right:8px;white-space:nowrap}
+#brand .mark{height:34px;width:auto}
+#brand b{color:var(--yellow)}
+button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:6px 12px;cursor:pointer}
+button:hover:not(:disabled){border-color:var(--yellow)}
+button:disabled{opacity:.4;cursor:default}
+button:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+button.primary{background:var(--yellow);color:#0a1a5c;border-color:var(--yellow);font-weight:700}
+#crumbs{display:flex;flex-wrap:wrap;gap:4px;align-items:center;color:var(--dim)}
+#crumbs button{border-color:transparent;background:transparent;padding:4px 6px}
+body.empty #bar,body.empty #info{display:none}
+#welcome{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px}
+#welcome[hidden]{display:none}
+#welcome .mark{height:min(210px,32vh);width:auto}
+#welcome h1{margin:8px 0 0;font-size:clamp(2.2rem,6vw,3.4rem);letter-spacing:.01em}
+#welcome .sub{color:var(--yellow);letter-spacing:.38em;text-transform:uppercase;font-size:.85rem}
+#welcome p{max-width:36ch;color:var(--dim);line-height:1.5;margin:6px 0 12px}
+#welcome button{font-size:1.1rem;padding:10px 26px}
+#info{position:fixed;left:16px;bottom:16px;max-width:min(520px,calc(100% - 32px));line-height:1.45}
+#name{font-size:1.5rem;font-weight:600;overflow-wrap:anywhere}
+#detail{color:var(--dim)}
+#note{position:fixed;right:16px;bottom:16px;max-width:min(360px,calc(100% - 32px));color:var(--dim);text-align:right;font-size:.9rem;line-height:1.4}
+</style>
+</head>
+<body class="empty">
+<header id="bar">
+  <div id="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="mark" role="img" aria-label="SOHONorth Helical Browser">
+  <defs>
+    <radialGradient id="bgH1" cx="50%" cy="36%" r="80%">
+      <stop offset="0" stop-color="#2f58e0"/><stop offset=".6" stop-color="#1b3dbd"/><stop offset="1" stop-color="#0b1c73"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bgH1)"/>
+  <g>
+  <g fill="none" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M338.0 215.0 L337.3 218.1 L335.2 221.2 L331.8 224.4 L327.0 227.5 L321.1 230.6 L314.0 233.8 L305.9 236.9 L297.0 240.0 L287.4 243.1 L277.2 246.2 L266.7 249.4 L256.0 252.5 L245.3 255.6 L234.8 258.8 L224.6 261.9 L215.0 265.0 L206.1 268.1 L198.0 271.2 L190.9 274.4 L185.0 277.5 L180.2 280.6 L176.8 283.8 L174.7 286.9 L174.0 290.0" stroke="#ffd23f" opacity=".42"/>
+    <path d="M338.0 365.0 L337.3 368.1 L335.2 371.2 L331.8 374.4 L327.0 377.5 L321.1 380.6 L314.0 383.8 L305.9 386.9 L297.0 390.0 L287.4 393.1 L277.2 396.2 L266.7 399.4 L256.0 402.5 L245.3 405.6 L234.8 408.8 L224.6 411.9 L215.0 415.0 L206.1 418.1 L198.0 421.3 L190.9 424.4 L185.0 427.5 L180.2 430.6 L176.8 433.8 L174.7 436.9 L174.0 440.0" stroke="#ffd23f" opacity=".42"/>
+    <path d="M338.0 140.0 L337.3 143.1 L335.2 146.2 L331.8 149.4 L327.0 152.5 L321.1 155.6 L314.0 158.8 L305.9 161.9 L297.0 165.0 L287.4 168.1 L277.2 171.2 L266.7 174.4 L256.0 177.5 L245.3 180.6 L234.8 183.8 L224.6 186.9 L215.0 190.0 L206.1 193.1 L198.0 196.2 L190.9 199.4 L185.0 202.5 L180.2 205.6 L176.8 208.8 L174.7 211.9 L174.0 215.0" stroke="#bcd2ff" opacity=".42"/>
+    <path d="M338.0 290.0 L337.3 293.1 L335.2 296.2 L331.8 299.4 L327.0 302.5 L321.1 305.6 L314.0 308.8 L305.9 311.9 L297.0 315.0 L287.4 318.1 L277.2 321.2 L266.7 324.4 L256.0 327.5 L245.3 330.6 L234.8 333.8 L224.6 336.9 L215.0 340.0 L206.1 343.1 L198.0 346.2 L190.9 349.4 L185.0 352.5 L180.2 355.6 L176.8 358.8 L174.7 361.9 L174.0 365.0" stroke="#bcd2ff" opacity=".42"/>
+    <path d="M198.0 158.8 L314.0 158.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 196.2 L198.0 196.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M338.0 215.0 L174.0 215.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 233.8 L198.0 233.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 271.2 L314.0 271.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M174.0 290.0 L338.0 290.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 308.8 L314.0 308.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 346.2 L198.0 346.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M338.0 365.0 L174.0 365.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 383.8 L198.0 383.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 421.2 L314.0 421.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M174.0 140.0 L174.7 143.1 L176.8 146.2 L180.2 149.4 L185.0 152.5 L190.9 155.6 L198.0 158.8 L206.1 161.9 L215.0 165.0 L224.6 168.1 L234.8 171.2 L245.3 174.4 L256.0 177.5 L266.7 180.6 L277.2 183.8 L287.4 186.9 L297.0 190.0 L305.9 193.1 L314.0 196.2 L321.1 199.4 L327.0 202.5 L331.8 205.6 L335.2 208.8 L337.3 211.9 L338.0 215.0" stroke="#ffd23f"/>
+    <path d="M174.0 290.0 L174.7 293.1 L176.8 296.2 L180.2 299.4 L185.0 302.5 L190.9 305.6 L198.0 308.8 L206.1 311.9 L215.0 315.0 L224.6 318.1 L234.8 321.2 L245.3 324.4 L256.0 327.5 L266.7 330.6 L277.2 333.8 L287.4 336.9 L297.0 340.0 L305.9 343.1 L314.0 346.2 L321.1 349.4 L327.0 352.5 L331.8 355.6 L335.2 358.8 L337.3 361.9 L338.0 365.0" stroke="#ffd23f"/>
+    <path d="M174.0 215.0 L174.7 218.1 L176.8 221.2 L180.2 224.4 L185.0 227.5 L190.9 230.6 L198.0 233.8 L206.1 236.9 L215.0 240.0 L224.6 243.1 L234.8 246.2 L245.3 249.4 L256.0 252.5 L266.7 255.6 L277.2 258.8 L287.4 261.9 L297.0 265.0 L305.9 268.1 L314.0 271.2 L321.1 274.4 L327.0 277.5 L331.8 280.6 L335.2 283.8 L337.3 286.9 L338.0 290.0" stroke="#bcd2ff"/>
+    <path d="M174.0 365.0 L174.7 368.1 L176.8 371.2 L180.2 374.4 L185.0 377.5 L190.9 380.6 L198.0 383.8 L206.1 386.9 L215.0 390.0 L224.6 393.1 L234.8 396.2 L245.3 399.4 L256.0 402.5 L266.7 405.6 L277.2 408.8 L287.4 411.9 L297.0 415.0 L305.9 418.1 L314.0 421.3 L321.1 424.4 L327.0 427.5 L331.8 430.6 L335.2 433.8 L337.3 436.9 L338.0 440.0" stroke="#bcd2ff"/>
+  </g>
+  <circle cx="256" cy="86" r="46" fill="none" stroke="#bcd2ff" stroke-width="5" opacity=".55"/>
+  <polygon points="256.0,46.0 262.2,79.8 296.0,86.0 262.2,92.2 256.0,126.0 249.8,92.2 216.0,86.0 249.8,79.8" fill="#ffd23f"/>
+  </g>
+</svg><span><b>SOHONorth</b> Helical Browser</span></div>
+  <button id="pick" class="primary">Open folder</button>
+  <button id="up" title="Backspace" disabled>Up one level</button>
+  <nav id="crumbs" aria-label="Folder path"></nav>
+</header>
+<main id="welcome">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="mark" role="img" aria-label="SOHONorth Helical Browser">
+  <defs>
+    <radialGradient id="bgH2" cx="50%" cy="36%" r="80%">
+      <stop offset="0" stop-color="#2f58e0"/><stop offset=".6" stop-color="#1b3dbd"/><stop offset="1" stop-color="#0b1c73"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bgH2)"/>
+  <g>
+  <g fill="none" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M338.0 215.0 L337.3 218.1 L335.2 221.2 L331.8 224.4 L327.0 227.5 L321.1 230.6 L314.0 233.8 L305.9 236.9 L297.0 240.0 L287.4 243.1 L277.2 246.2 L266.7 249.4 L256.0 252.5 L245.3 255.6 L234.8 258.8 L224.6 261.9 L215.0 265.0 L206.1 268.1 L198.0 271.2 L190.9 274.4 L185.0 277.5 L180.2 280.6 L176.8 283.8 L174.7 286.9 L174.0 290.0" stroke="#ffd23f" opacity=".42"/>
+    <path d="M338.0 365.0 L337.3 368.1 L335.2 371.2 L331.8 374.4 L327.0 377.5 L321.1 380.6 L314.0 383.8 L305.9 386.9 L297.0 390.0 L287.4 393.1 L277.2 396.2 L266.7 399.4 L256.0 402.5 L245.3 405.6 L234.8 408.8 L224.6 411.9 L215.0 415.0 L206.1 418.1 L198.0 421.3 L190.9 424.4 L185.0 427.5 L180.2 430.6 L176.8 433.8 L174.7 436.9 L174.0 440.0" stroke="#ffd23f" opacity=".42"/>
+    <path d="M338.0 140.0 L337.3 143.1 L335.2 146.2 L331.8 149.4 L327.0 152.5 L321.1 155.6 L314.0 158.8 L305.9 161.9 L297.0 165.0 L287.4 168.1 L277.2 171.2 L266.7 174.4 L256.0 177.5 L245.3 180.6 L234.8 183.8 L224.6 186.9 L215.0 190.0 L206.1 193.1 L198.0 196.2 L190.9 199.4 L185.0 202.5 L180.2 205.6 L176.8 208.8 L174.7 211.9 L174.0 215.0" stroke="#bcd2ff" opacity=".42"/>
+    <path d="M338.0 290.0 L337.3 293.1 L335.2 296.2 L331.8 299.4 L327.0 302.5 L321.1 305.6 L314.0 308.8 L305.9 311.9 L297.0 315.0 L287.4 318.1 L277.2 321.2 L266.7 324.4 L256.0 327.5 L245.3 330.6 L234.8 333.8 L224.6 336.9 L215.0 340.0 L206.1 343.1 L198.0 346.2 L190.9 349.4 L185.0 352.5 L180.2 355.6 L176.8 358.8 L174.7 361.9 L174.0 365.0" stroke="#bcd2ff" opacity=".42"/>
+    <path d="M198.0 158.8 L314.0 158.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 196.2 L198.0 196.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M338.0 215.0 L174.0 215.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 233.8 L198.0 233.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 271.2 L314.0 271.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M174.0 290.0 L338.0 290.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 308.8 L314.0 308.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 346.2 L198.0 346.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M338.0 365.0 L174.0 365.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 383.8 L198.0 383.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 421.2 L314.0 421.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M174.0 140.0 L174.7 143.1 L176.8 146.2 L180.2 149.4 L185.0 152.5 L190.9 155.6 L198.0 158.8 L206.1 161.9 L215.0 165.0 L224.6 168.1 L234.8 171.2 L245.3 174.4 L256.0 177.5 L266.7 180.6 L277.2 183.8 L287.4 186.9 L297.0 190.0 L305.9 193.1 L314.0 196.2 L321.1 199.4 L327.0 202.5 L331.8 205.6 L335.2 208.8 L337.3 211.9 L338.0 215.0" stroke="#ffd23f"/>
+    <path d="M174.0 290.0 L174.7 293.1 L176.8 296.2 L180.2 299.4 L185.0 302.5 L190.9 305.6 L198.0 308.8 L206.1 311.9 L215.0 315.0 L224.6 318.1 L234.8 321.2 L245.3 324.4 L256.0 327.5 L266.7 330.6 L277.2 333.8 L287.4 336.9 L297.0 340.0 L305.9 343.1 L314.0 346.2 L321.1 349.4 L327.0 352.5 L331.8 355.6 L335.2 358.8 L337.3 361.9 L338.0 365.0" stroke="#ffd23f"/>
+    <path d="M174.0 215.0 L174.7 218.1 L176.8 221.2 L180.2 224.4 L185.0 227.5 L190.9 230.6 L198.0 233.8 L206.1 236.9 L215.0 240.0 L224.6 243.1 L234.8 246.2 L245.3 249.4 L256.0 252.5 L266.7 255.6 L277.2 258.8 L287.4 261.9 L297.0 265.0 L305.9 268.1 L314.0 271.2 L321.1 274.4 L327.0 277.5 L331.8 280.6 L335.2 283.8 L337.3 286.9 L338.0 290.0" stroke="#bcd2ff"/>
+    <path d="M174.0 365.0 L174.7 368.1 L176.8 371.2 L180.2 374.4 L185.0 377.5 L190.9 380.6 L198.0 383.8 L206.1 386.9 L215.0 390.0 L224.6 393.1 L234.8 396.2 L245.3 399.4 L256.0 402.5 L266.7 405.6 L277.2 408.8 L287.4 411.9 L297.0 415.0 L305.9 418.1 L314.0 421.3 L321.1 424.4 L327.0 427.5 L331.8 430.6 L335.2 433.8 L337.3 436.9 L338.0 440.0" stroke="#bcd2ff"/>
+  </g>
+  <circle cx="256" cy="86" r="46" fill="none" stroke="#bcd2ff" stroke-width="5" opacity=".55"/>
+  <polygon points="256.0,46.0 262.2,79.8 296.0,86.0 262.2,92.2 256.0,126.0 249.8,92.2 216.0,86.0 249.8,79.8" fill="#ffd23f"/>
+  </g>
+</svg>
+  <h1>SOHONorth</h1>
+  <div class="sub">Helical Browser</div>
+  <p>Open a folder and spin through its contents on a helix.</p>
+  <button id="pick2" class="primary">Open a folder</button>
+</main>
+<div id="info"><div id="name"></div><div id="detail"></div></div>
+<div id="note"></div>
+
+<script src="three.min.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const R = 4.2, STEP = 0.55, RISE = 0.42, W = 13;
+const FOLDER = 0xffd23f, FILE = 0x9cc3ff;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---- scene ----
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+cam.position.set(0, 0, 12);
+const ren = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+ren.setPixelRatio(Math.min(devicePixelRatio, 2));
+document.body.prepend(ren.domElement);
+const dom = ren.domElement;
+const group = new THREE.Group();
+scene.add(group);
+const lineGeo = new THREE.BufferGeometry();
+group.add(new THREE.Line(lineGeo, new THREE.LineBasicMaterial({ color: 0x6f94ff, transparent: true, opacity: 0.75 })));
+const gDir = new THREE.OctahedronGeometry(0.26), gFile = new THREE.SphereGeometry(0.15, 16, 12);
+function resize() {
+  ren.setSize(innerWidth, innerHeight);
+  cam.aspect = innerWidth / innerHeight;
+  cam.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+// ---- data ----
+async function readDir(h) {
+  const l = [];
+  for await (const [name, handle] of h.entries()) {
+    if (name[0] === '.') continue;
+    l.push({ name, kind: handle.kind === 'directory' ? 'directory' : 'file', handle });
+  }
+  l.sort((a, b) => (a.kind === b.kind ? 0 : a.kind === 'directory' ? -1 : 1) ||
+    a.name.localeCompare(b.name, undefined, { numeric: true }));
+  return l;
+}
+
+// ---- state ----
+let stack = [], entries = [], nodes = new Map(), t = 0, target = 0, shown = -1;
+
+function label(text, folder) {
+  const c = document.createElement('canvas');
+  c.width = 512; c.height = 96;
+  const g = c.getContext('2d');
+  g.font = '600 40px "Iowan Old Style",Palatino,Georgia,serif';
+  g.textBaseline = 'middle';
+  g.fillStyle = folder ? '#ffd23f' : '#eef3ff';
+  g.fillText(text.length > 24 ? text.slice(0, 23) + '…' : text, 40, 50);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
+  s.center.set(0, 0.5);
+  return s;
+}
+function mk(i) {
+  const e = entries[i], d = e.kind === 'directory';
+  const m = new THREE.Mesh(d ? gDir : gFile, new THREE.MeshBasicMaterial({ color: d ? FOLDER : FILE, transparent: true }));
+  const s = label(e.name, d);
+  m.userData.i = s.userData.i = i;
+  group.add(m, s);
+  const n = { m, s };
+  nodes.set(i, n);
+  return n;
+}
+function show(list, pos = 0) {
+  nodes.forEach(n => { group.remove(n.m, n.s); n.s.material.map.dispose(); n.s.material.dispose(); n.m.material.dispose(); });
+  nodes.clear();
+  entries = list;
+  target = t = Math.min(pos, Math.max(0, list.length - 1));
+  shown = -1;
+  document.body.classList.remove('empty');
+  $('#welcome').hidden = true;
+  $('#up').disabled = stack.length < 2;
+  renderCrumbs();
+  setInfo(Math.round(t));
+}
+function renderCrumbs() {
+  const c = $('#crumbs');
+  c.textContent = '';
+  stack.forEach((s, d) => {
+    const b = document.createElement('button');
+    b.textContent = s.label;
+    b.onclick = () => jump(d);
+    c.append(b);
+    if (d < stack.length - 1) c.append('/');
+  });
+}
+function jump(d) {
+  while (stack.length > d + 1) stack.pop();
+  const top = stack[stack.length - 1];
+  show(top.list, top.pos);
+}
+function up() { if (stack.length > 1) jump(stack.length - 2); }
+function note(msg) { $('#note').textContent = msg; }
+const go = x => { target = Math.max(0, Math.min(entries.length - 1, Math.round(x))); };
+
+async function open(i) {
+  const e = entries[i];
+  if (!e) return;
+  if (e.kind === 'directory') {
+    let list;
+    try { list = await readDir(e.handle); }
+    catch (err) { return note('Couldn’t read that folder: ' + err.message); }
+    stack[stack.length - 1].pos = i;
+    stack.push({ label: e.name, list, pos: 0 });
+    show(list, 0);
+  } else if (/\.(md|markdown)$/i.test(e.name)) {
+    note('The Markdown editor arrives in the next step.');
+  } else {
+    note('Only Markdown files will open in the editor.');
+  }
+}
+function fmt(b) { return b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(1) + ' MB'; }
+async function setInfo(i) {
+  shown = i;
+  const e = entries[i];
+  if (!e) { $('#name').textContent = 'This folder is empty'; $('#detail').textContent = 'Press Backspace to go up.'; return; }
+  $('#name').textContent = e.name;
+  const pos = (i + 1) + ' of ' + entries.length;
+  if (e.kind === 'directory') { $('#detail').textContent = 'Folder, ' + pos + '. Press Enter to open.'; return; }
+  const kind = /\.(md|markdown)$/i.test(e.name) ? 'Markdown file' : 'File';
+  $('#detail').textContent = kind + ', ' + pos;
+  let size;
+  try { size = (await e.handle.getFile()).size; } catch (_) {}
+  if (shown === i && size != null) $('#detail').textContent = kind + ', ' + fmt(size) + ', ' + pos;
+}
+
+// ---- render loop ----
+function frame() {
+  requestAnimationFrame(frame);
+  if (!entries.length) { ren.render(scene, cam); return; }
+  t += (target - t) * (reduce ? 1 : 0.12);
+  if (Math.abs(target - t) < 0.001) t = target;
+  const lo = Math.max(0, Math.floor(t) - W), hi = Math.min(entries.length - 1, Math.ceil(t) + W);
+  nodes.forEach((n, i) => { n.m.visible = n.s.visible = i >= lo && i <= hi; });
+  const pts = [];
+  for (let i = lo; i <= hi; i++) {
+    const n = nodes.get(i) || mk(i);
+    const a = (i - t) * STEP, x = Math.sin(a) * R, y = -(i - t) * RISE, z = Math.cos(a) * R;
+    const k = (z + R) / (2 * R), near = Math.abs(i - t) < 0.5 ? 1.3 : 1, sz = (0.55 + 0.6 * k) * near;
+    n.m.position.set(x, y, z);
+    n.m.scale.setScalar(sz);
+    n.s.position.set(x, y, z);
+    n.s.scale.set(5.12 * sz * 0.8, 0.96 * sz * 0.8, 1);
+    n.m.material.opacity = n.s.material.opacity = 0.1 + 0.9 * Math.pow(k, 1.6);
+    pts.push(new THREE.Vector3(x, y, z));
+  }
+  lineGeo.dispose();
+  lineGeo.setFromPoints(pts);
+  const f = Math.round(t);
+  if (f !== shown) setInfo(f);
+  ren.render(scene, cam);
+}
+
+// ---- input ----
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+function pick(e) {
+  const r = dom.getBoundingClientRect();
+  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height * 2 - 1));
+  ray.setFromCamera(ndc, cam);
+  const hits = ray.intersectObjects(group.children.filter(o => o.visible && o.userData.i !== undefined));
+  if (!hits.length) return;
+  const i = hits[0].object.userData.i;
+  i === Math.round(target) ? open(i) : go(i);
+}
+let acc = 0;
+dom.addEventListener('wheel', e => {
+  e.preventDefault();
+  acc += e.deltaY;
+  if (Math.abs(acc) >= 40) { go(target + Math.sign(acc) * Math.min(3, Math.floor(Math.abs(acc) / 40))); acc = 0; }
+}, { passive: false });
+let drag = null;
+dom.addEventListener('pointerdown', e => { drag = { y: e.clientY, x: e.clientX, t: target, moved: false }; dom.setPointerCapture(e.pointerId); });
+dom.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const dy = e.clientY - drag.y, dx = e.clientX - drag.x;
+  if (Math.abs(dy) + Math.abs(dx) > 6) drag.moved = true;
+  if (drag.moved) go(drag.t - (dy + dx * 0.5) / 28);
+});
+dom.addEventListener('pointerup', e => { if (drag && !drag.moved) pick(e); drag = null; });
+addEventListener('keydown', e => {
+  if (!entries.length && e.key !== 'Backspace') return;
+  const k = e.key;
+  if (k === 'ArrowDown' || k === 'ArrowRight') go(target + 1);
+  else if (k === 'ArrowUp' || k === 'ArrowLeft') go(target - 1);
+  else if (k === 'PageDown') go(target + 10);
+  else if (k === 'PageUp') go(target - 10);
+  else if (k === 'Home') go(0);
+  else if (k === 'End') go(entries.length - 1);
+  else if (k === 'Enter' && document.activeElement === document.body) open(Math.round(target));
+  else if (k === 'Backspace') up();
+  else return;
+  e.preventDefault();
+});
+
+async function openFolder() {
+  if (!window.showDirectoryPicker) return note('This browser can’t open folders. Use Chrome or ChromeOS.');
+  try {
+    const h = await showDirectoryPicker({ mode: 'read' });
+    stack = [{ label: h.name, list: await readDir(h), pos: 0 }];
+    show(stack[0].list, 0);
+    note('Scroll, drag, or use the arrow keys to spin. Enter opens. Backspace goes up.');
+  } catch (err) {
+    if (err.name !== 'AbortError') note('Couldn’t open that folder: ' + err.message);
+  }
+}
+$('#pick').onclick = $('#pick2').onclick = openFolder;
+$('#up').onclick = up;
+
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js');
+frame();
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 320" role="img" aria-label="SOHONorth Helical Browser">
+  <rect width="1100" height="320" rx="28" fill="#071655"/>
+  <svg x="40" y="40" width="240" height="240" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="mark" role="img" aria-label="SOHONorth Helical Browser">
+  <defs>
+    <radialGradient id="bgL" cx="50%" cy="36%" r="80%">
+      <stop offset="0" stop-color="#2f58e0"/><stop offset=".6" stop-color="#1b3dbd"/><stop offset="1" stop-color="#0b1c73"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bgL)"/>
+  <g>
+  <g fill="none" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M338.0 215.0 L337.3 218.1 L335.2 221.2 L331.8 224.4 L327.0 227.5 L321.1 230.6 L314.0 233.8 L305.9 236.9 L297.0 240.0 L287.4 243.1 L277.2 246.2 L266.7 249.4 L256.0 252.5 L245.3 255.6 L234.8 258.8 L224.6 261.9 L215.0 265.0 L206.1 268.1 L198.0 271.2 L190.9 274.4 L185.0 277.5 L180.2 280.6 L176.8 283.8 L174.7 286.9 L174.0 290.0" stroke="#ffd23f" opacity=".42"/>
+    <path d="M338.0 365.0 L337.3 368.1 L335.2 371.2 L331.8 374.4 L327.0 377.5 L321.1 380.6 L314.0 383.8 L305.9 386.9 L297.0 390.0 L287.4 393.1 L277.2 396.2 L266.7 399.4 L256.0 402.5 L245.3 405.6 L234.8 408.8 L224.6 411.9 L215.0 415.0 L206.1 418.1 L198.0 421.3 L190.9 424.4 L185.0 427.5 L180.2 430.6 L176.8 433.8 L174.7 436.9 L174.0 440.0" stroke="#ffd23f" opacity=".42"/>
+    <path d="M338.0 140.0 L337.3 143.1 L335.2 146.2 L331.8 149.4 L327.0 152.5 L321.1 155.6 L314.0 158.8 L305.9 161.9 L297.0 165.0 L287.4 168.1 L277.2 171.2 L266.7 174.4 L256.0 177.5 L245.3 180.6 L234.8 183.8 L224.6 186.9 L215.0 190.0 L206.1 193.1 L198.0 196.2 L190.9 199.4 L185.0 202.5 L180.2 205.6 L176.8 208.8 L174.7 211.9 L174.0 215.0" stroke="#bcd2ff" opacity=".42"/>
+    <path d="M338.0 290.0 L337.3 293.1 L335.2 296.2 L331.8 299.4 L327.0 302.5 L321.1 305.6 L314.0 308.8 L305.9 311.9 L297.0 315.0 L287.4 318.1 L277.2 321.2 L266.7 324.4 L256.0 327.5 L245.3 330.6 L234.8 333.8 L224.6 336.9 L215.0 340.0 L206.1 343.1 L198.0 346.2 L190.9 349.4 L185.0 352.5 L180.2 355.6 L176.8 358.8 L174.7 361.9 L174.0 365.0" stroke="#bcd2ff" opacity=".42"/>
+    <path d="M198.0 158.8 L314.0 158.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 196.2 L198.0 196.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M338.0 215.0 L174.0 215.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 233.8 L198.0 233.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 271.2 L314.0 271.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M174.0 290.0 L338.0 290.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 308.8 L314.0 308.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 346.2 L198.0 346.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M338.0 365.0 L174.0 365.0" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M314.0 383.8 L198.0 383.8" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M198.0 421.2 L314.0 421.2" stroke="#eef3ff" stroke-width="7" opacity=".55"/>
+    <path d="M174.0 140.0 L174.7 143.1 L176.8 146.2 L180.2 149.4 L185.0 152.5 L190.9 155.6 L198.0 158.8 L206.1 161.9 L215.0 165.0 L224.6 168.1 L234.8 171.2 L245.3 174.4 L256.0 177.5 L266.7 180.6 L277.2 183.8 L287.4 186.9 L297.0 190.0 L305.9 193.1 L314.0 196.2 L321.1 199.4 L327.0 202.5 L331.8 205.6 L335.2 208.8 L337.3 211.9 L338.0 215.0" stroke="#ffd23f"/>
+    <path d="M174.0 290.0 L174.7 293.1 L176.8 296.2 L180.2 299.4 L185.0 302.5 L190.9 305.6 L198.0 308.8 L206.1 311.9 L215.0 315.0 L224.6 318.1 L234.8 321.2 L245.3 324.4 L256.0 327.5 L266.7 330.6 L277.2 333.8 L287.4 336.9 L297.0 340.0 L305.9 343.1 L314.0 346.2 L321.1 349.4 L327.0 352.5 L331.8 355.6 L335.2 358.8 L337.3 361.9 L338.0 365.0" stroke="#ffd23f"/>
+    <path d="M174.0 215.0 L174.7 218.1 L176.8 221.2 L180.2 224.4 L185.0 227.5 L190.9 230.6 L198.0 233.8 L206.1 236.9 L215.0 240.0 L224.6 243.1 L234.8 246.2 L245.3 249.4 L256.0 252.5 L266.7 255.6 L277.2 258.8 L287.4 261.9 L297.0 265.0 L305.9 268.1 L314.0 271.2 L321.1 274.4 L327.0 277.5 L331.8 280.6 L335.2 283.8 L337.3 286.9 L338.0 290.0" stroke="#bcd2ff"/>
+    <path d="M174.0 365.0 L174.7 368.1 L176.8 371.2 L180.2 374.4 L185.0 377.5 L190.9 380.6 L198.0 383.8 L206.1 386.9 L215.0 390.0 L224.6 393.1 L234.8 396.2 L245.3 399.4 L256.0 402.5 L266.7 405.6 L277.2 408.8 L287.4 411.9 L297.0 415.0 L305.9 418.1 L314.0 421.3 L321.1 424.4 L327.0 427.5 L331.8 430.6 L335.2 433.8 L337.3 436.9 L338.0 440.0" stroke="#bcd2ff"/>
+  </g>
+  <circle cx="256" cy="86" r="46" fill="none" stroke="#bcd2ff" stroke-width="5" opacity=".55"/>
+  <polygon points="256.0,46.0 262.2,79.8 296.0,86.0 262.2,92.2 256.0,126.0 249.8,92.2 216.0,86.0 249.8,79.8" fill="#ffd23f"/>
+  </g>
+</svg>
+  <text x="320" y="170" font-family="Iowan Old Style, Palatino, Palatino Linotype, Georgia, serif" font-size="108" font-weight="700" fill="#eef3ff">SOHO<tspan fill="#ffd23f">North</tspan></text>
+  <text x="326" y="232" font-family="Iowan Old Style, Palatino, Palatino Linotype, Georgia, serif" font-size="40" letter-spacing="15" fill="#bcd2ff">HELICAL BROWSER</text>
+</svg>
